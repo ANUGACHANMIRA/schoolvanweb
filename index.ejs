@@ -1,0 +1,330 @@
+<%- include('partials/header') %>
+
+<!-- ==========================================================================
+     HERO SECTION: FULL-WIDTH VARIABLE-DURATION IMAGE SLIDESHOW
+     ========================================================================== -->
+<section class="hero-section" id="heroSlider" aria-label="සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය Showcase">
+  <div class="slides-wrapper">
+    <% if (slides && slides.length > 0) { %>
+      <% slides.forEach((slide, index) => { %>
+        <div class="slide-item <%= index === 0 ? 'active' : '' %>" 
+             data-index="<%= index %>" 
+             data-duration="<%= slide.duration_seconds || 5 %>"
+             aria-hidden="<%= index === 0 ? 'false' : 'true' %>">
+          <img src="<%= slide.image_path %>" 
+               alt="<%= slide.title || 'Safe Ride School Van Slide' %>" 
+               class="slide-bg-img"
+               loading="<%= index === 0 ? 'eager' : 'lazy' %>">
+        </div>
+      <% }) %>
+    <% } else { %>
+      <!-- Default Placeholder If No Database Slides -->
+      <div class="slide-item active" data-index="0" data-duration="5">
+        <img src="/images/default-slide.svg" alt="Safe Ride School Vans Default" class="slide-bg-img">
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Hero Content Overlay -->
+  <div class="hero-overlay-content">
+    <div class="container">
+      <div class="hero-text-card">
+        <div class="hero-badge">
+          <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          Licensed &bull; Insured &bull; GPS Monitored
+        </div>
+        <h1 class="hero-title">
+          Safe &amp; Reliable <span>School Transport</span>
+        </h1>
+        <p class="hero-desc">
+          Providing peaceful commutes for parents and children alike. Modern vans, certified professional drivers, individual seatbelts, and live mobile tracking for every single route.
+        </p>
+        <div class="hero-buttons">
+          <a href="/contact" class="btn btn-primary">
+            Contact Us &amp; Book A Seat
+          </a>
+          <a href="/about" class="btn btn-outline-white">
+            Our Safety Standards
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prev / Next Navigation Arrows -->
+  <% if (slides && slides.length > 1) { %>
+    <button class="slider-arrow prev" id="sliderPrev" aria-label="Previous Slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="slider-arrow next" id="sliderNext" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Indicators / Dots -->
+    <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Slideshow indicators"></div>
+
+    <!-- Pause On Hover Tag -->
+    <div class="slider-pause-badge">
+      <svg style="width:12px;height:12px;fill:currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      PAUSED (HOVER)
+    </div>
+  <% } %>
+</section>
+
+<!-- ==========================================================================
+     WHY CHOOSE US SECTION
+     ========================================================================== -->
+<section class="section section-bg-white" id="why-choose-us">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Excellence In Student Transit</span>
+      <h2 class="section-title">Why Parents Trust Our Service</h2>
+      <p class="section-desc">
+        We understand that nothing matters more than your child's safety and well-being. Here is what sets our van service apart every morning and afternoon.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <!-- 1. Safety Protocols -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm7 10c0 4.52-3.08 8.71-7 9.93-3.92-1.22-7-5.41-7-9.93V6.3l7-3.11 7 3.11V11z"/>
+            <path d="M10 12.5l-2-2-1.41 1.41L10 15.33l6-6-1.41-1.41z"/>
+          </svg>
+        </div>
+        <h3 class="feature-card-title">Rigorous Safety First</h3>
+        <p class="feature-card-desc">
+          Every vehicle is equipped with three-point safety harnesses, certified child lock doors, front/rear dual dashcams, and pediatric emergency kits.
+        </p>
+      </div>
+
+      <!-- 2. Trained Drivers -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+        </div>
+        <h3 class="feature-card-title">Vetted, Certified Drivers</h3>
+        <p class="feature-card-desc">
+          100% background-checked, drug-tested drivers with clean commercial driving histories, pediatric first-aid certifications, and ongoing defensive driving training.
+        </p>
+      </div>
+
+      <!-- 3. GPS Tracking -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <h3 class="feature-card-title">Live GPS &amp; Alerts</h3>
+        <p class="feature-card-desc">
+          Real-time vehicle telemetry sends automated SMS and app alerts when the van is 5 minutes away, when pickup is completed, and when your child arrives safely at school.
+        </p>
+      </div>
+
+      <!-- 4. On-Time Pickup -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+          </svg>
+        </div>
+        <h3 class="feature-card-title">99.4% On-Time Punctuality</h3>
+        <p class="feature-card-desc">
+          Smart route optimization ensures your child never waits in the cold or misses morning bell time. Our dedicated dispatchers monitor traffic conditions in real-time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     SERVICES & ROUTES SUMMARY
+     ========================================================================== -->
+<section class="section section-bg-slate" id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Comprehensive Transit Solutions</span>
+      <h2 class="section-title">Our School Transportation Services</h2>
+      <p class="section-desc">
+        Tailored schedules designed for working parents and busy school calendars.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-box">
+        <div class="service-box-header">
+          <span class="service-badge">Most Popular</span>
+          <h3 class="service-title">Daily Door-to-Door Transit</h3>
+          <p style="font-size:0.9rem; opacity:0.85;">Home to school and back every school day</p>
+        </div>
+        <div class="service-box-body">
+          <p style="color:var(--slate-600); font-size:0.95rem;">
+            Direct pickup from your front door in the morning and safe return delivery right to your doorstep each afternoon.
+          </p>
+          <ul class="service-features-list">
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Fixed pickup window with 5-minute pre-arrival alert
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Dedicated driver &amp; route for familiar daily consistency
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Direct handover to designated guardian or school gatekeeper
+            </li>
+          </ul>
+          <a href="/contact?service=door-to-door" class="btn btn-outline-navy" style="margin-top:auto;">
+            Inquire About Your Route
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-box">
+        <div class="service-box-header">
+          <span class="service-badge">Flexible</span>
+          <h3 class="service-title">Single-Leg Transit (AM / PM)</h3>
+          <p style="font-size:0.9rem; opacity:0.85;">Morning-only or afternoon-only pickups</p>
+        </div>
+        <div class="service-box-body">
+          <p style="color:var(--slate-600); font-size:0.95rem;">
+            Perfect for parents who can drop off in the morning but need guaranteed reliable transportation back home in the afternoon.
+          </p>
+          <ul class="service-features-list">
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Flexible weekly or monthly booking options
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Same high safety standards and live GPS parent tracking
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Cost-effective rates tailored to your family's schedule
+            </li>
+          </ul>
+          <a href="/contact?service=single-leg" class="btn btn-outline-navy" style="margin-top:auto;">
+            View Pricing Options
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-box">
+        <div class="service-box-header">
+          <span class="service-badge">Custom</span>
+          <h3 class="service-title">After-School &amp; Activities</h3>
+          <p style="font-size:0.9rem; opacity:0.85;">Late buses for sports, music, tutoring &amp; events</p>
+        </div>
+        <div class="service-box-body">
+          <p style="color:var(--slate-600); font-size:0.95rem;">
+            Specialized van shuttles for extracurricular programs, tutoring academies, sports practices, and weekend school outings.
+          </p>
+          <ul class="service-features-list">
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              After-hours pickup windows (4:30 PM - 6:30 PM)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Charter van options for school field trips and tournaments
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Group discounts for student clubs and school teams
+            </li>
+          </ul>
+          <a href="/contact?service=activities" class="btn btn-outline-navy" style="margin-top:auto;">
+            Request Activity Shuttle
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     LATEST NEWS PREVIEW (3 ITEMS)
+     ========================================================================== -->
+<section class="section section-bg-white" id="news-preview">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Updates &amp; Announcements</span>
+      <h2 class="section-title">Latest Updates &amp; News</h2>
+      <p class="section-desc">
+        Stay up-to-date with route developments, vehicle maintenance schedules, and safety milestones.
+      </p>
+    </div>
+
+    <div class="news-grid">
+      <% if (news && news.length > 0) { %>
+        <% news.slice(0, 3).forEach(item => { %>
+          <article class="news-card">
+            <div class="news-card-thumb">
+              <img src="<%= item.image_url || '/images/news-fleet.svg' %>" alt="<%= item.title %>" loading="lazy">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-date">
+                <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                <%= item.date %>
+              </div>
+              <h3 class="news-card-title"><%= item.title %></h3>
+              <p class="news-card-text">
+                <%= item.summary || item.content.substring(0, 140) + '...' %>
+              </p>
+              <a href="/news" class="btn btn-sm btn-outline-navy" style="align-self:flex-start;">
+                Read Full Story &rarr;
+              </a>
+            </div>
+          </article>
+        <% }) %>
+      <% } else { %>
+        <p style="text-align:center; grid-column: 1 / -1; color: var(--slate-500);">No news posted yet.</p>
+      <% } %>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="/news" class="btn btn-navy">
+        View All News &amp; Updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     CALL-TO-ACTION BANNER
+     ========================================================================== -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2 class="cta-title">
+        Ready for stress-free <span>morning commutes</span>?
+      </h2>
+      <p class="cta-desc">
+        Join hundreds of satisfied parents who rely on සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය every day. Reserve your neighborhood route seat before registration fills for the term.
+      </p>
+    </div>
+    <div class="cta-actions">
+      <a href="/contact" class="btn btn-primary">
+        Register Today
+      </a>
+      <a href="tel:+15553928267" class="btn btn-outline-white">
+        Call (555) 392-8267
+      </a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
