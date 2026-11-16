@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+</head>
+<body class="login-page">
+
+  <div class="login-card">
+    <div class="login-header">
+      <a href="/" style="display:inline-flex; align-items:center; justify-content:center; gap:0.75rem; text-decoration:none; margin-bottom:1.25rem;">
+        <img src="/images/logo.png" alt="සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය" style="height:56px; width:auto; margin:0; object-fit:contain;">
+        <div class="brand-text" style="text-align:left;">
+          <span class="brand-title" style="font-size:1.15rem; letter-spacing:normal; line-height:1.2;">සමස්ත ලංකා</span>
+          <span class="brand-subtitle" style="font-size:0.75rem; letter-spacing:normal; text-transform:none;">පාසල් ළමුන් ප්‍රවාහන සංගමය</span>
+        </div>
+      </a>
+      <h2>Staff Portal Login</h2>
+      <p>Enter your credentials to access the administrative dashboard</p>
+    </div>
+
+    <% if (error) { %>
+      <div class="alert alert-danger" style="display:flex; margin-bottom:1.5rem;">
+        <svg style="width:18px;height:18px;fill:currentColor;flex-shrink:0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <span><%= error %></span>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/admin/login">
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="admin" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:0.85rem; font-size:1rem; margin-top:0.5rem;">
+        Sign In to Admin Panel
+      </button>
+    </form>
+
+    <div class="login-helper-box">
+      <strong>Default Setup Credentials:</strong><br>
+      Username: <code style="background:#e2e8f0; padding:1px 4px; border-radius:3px;">admin</code><br>
+      Password: <code style="background:#e2e8f0; padding:1px 4px; border-radius:3px;">admin123</code><br>
+      <span style="font-size:0.75rem; color:var(--slate-500); display:block; margin-top:4px;">
+        * For production security, update the default password after first login.
+      </span>
+    </div>
+
+    <div style="text-align:center; margin-top: 1.5rem;">
+      <a href="/" style="font-size:0.88rem; color:var(--slate-500); font-weight:600;">
+        &larr; Back to Public Website
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

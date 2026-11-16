@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' | සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය' : 'සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය' %></title>
+  <meta name="description" content="සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය - විශ්වාසනීය සහ සුරක්ෂිත පාසල් ප්‍රවාහන සේවාව.">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+</head>
+<body>
+
+  <!-- 1. SLIM TOP INFO BAR -->
+  <header class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-tagline">
+        <span class="badge">Safe &amp; Punctual</span>
+        <span>Trusted daily school transportation for your children</span>
+      </div>
+      <div class="top-bar-contacts">
+        <a href="tel:+15553928267" class="top-bar-item" title="Call Dispatch">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>(555) 392-8267</span>
+        </a>
+        <a href="mailto:info@saferideschoolvans.com" class="top-bar-item" title="Email Us">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span>info@saferideschoolvans.com</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. STICKY NAVBAR -->
+  <nav class="header-sticky">
+    <div class="container navbar">
+      <!-- Brand Logo + Name -->
+      <a href="/" class="brand-logo" aria-label="සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය">
+        <img src="/images/logo.png" alt="සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය Logo" width="50" height="46" style="object-fit: contain;">
+        <div class="brand-text">
+          <span class="brand-title" style="font-size: 1.15rem; letter-spacing: normal; line-height: 1.2;">සමස්ත ලංකා</span>
+          <span class="brand-subtitle" style="font-size: 0.72rem; letter-spacing: normal; text-transform: none;">පාසල් ළමුන් ප්‍රවාහන සංගමය</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Navigation Links -->
+      <ul class="nav-menu" id="navMenu">
+        <li>
+          <a href="/" class="nav-link <%= currentPath === '/' ? 'active' : '' %>">Home</a>
+        </li>
+        <li>
+          <a href="/about" class="nav-link <%= currentPath === '/about' ? 'active' : '' %>">About Us</a>
+        </li>
+        <li>
+          <a href="/news" class="nav-link <%= currentPath === '/news' ? 'active' : '' %>">News</a>
+        </li>
+        <li>
+          <a href="/contact" class="nav-link <%= currentPath === '/contact' ? 'active' : '' %>">Contact Us</a>
+        </li>
+      </ul>
+
+      <!-- Action Items on Right -->
+      <div class="nav-actions">
+        <div class="nav-phone">
+          <span class="nav-phone-label">Dispatch Line</span>
+          <a href="tel:+15553928267" class="nav-phone-number">(555) 392-8267</a>
+        </div>
+        <a href="tel:+15553928267" class="btn btn-primary" title="Call Now">
+          <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          Call Now
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>

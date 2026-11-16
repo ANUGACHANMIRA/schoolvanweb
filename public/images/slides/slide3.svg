@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0B1F3A"/>
+    </linearGradient>
+    <linearGradient id="yellowPill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC20E"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="800" fill="url(#bgGrad3)"/>
+
+  <!-- Subtle Safety Blueprint / Grid in Background -->
+  <g opacity="0.06" stroke="#94A3B8" stroke-width="1.5">
+    <pattern id="grid3" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="none"/>
+      <path d="M 60 0 L 0 0 0 60"/>
+    </pattern>
+  </g>
+  <rect width="1920" height="800" fill="url(#grid3)" opacity="0.1"/>
+
+  <!-- Large Safety Shield Emblem in background -->
+  <path d="M 1400,100 L 1700,200 L 1700,500 Q 1400,750 1400,750 Q 1100,750 1100,500 L 1100,200 Z" 
+        fill="#FFC20E" opacity="0.04"/>
+
+  <!-- Right Visual Feature Showcase Cards -->
+  <g transform="translate(1050, 160)" filter="url(#cardShadow)">
+    <!-- Feature 1: Safety Seatbelts & Climate Cabin -->
+    <g transform="translate(0, 0)">
+      <rect width="520" height="130" rx="18" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      <circle cx="65" cy="65" r="36" fill="#FFC20E"/>
+      <!-- Seatbelt Icon -->
+      <path d="M 45,85 L 85,45" stroke="#0B1F3A" stroke-width="8" stroke-linecap="round"/>
+      <rect x="52" y="52" width="26" height="26" rx="4" fill="#0B1F3A"/>
+      <rect x="58" y="58" width="14" height="14" rx="2" fill="#FFC20E"/>
+      <text x="125" y="52" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="bold" fill="#F8FAFC">Three-Point Seatbelts</text>
+      <text x="125" y="82" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94A3B8">Individual safety harnesses for every single seat across our fleet.</text>
+    </g>
+
+    <!-- Feature 2: High-Def Interior & Road CCTV -->
+    <g transform="translate(40, 160)">
+      <rect width="520" height="130" rx="18" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      <circle cx="65" cy="65" r="36" fill="#38BDF8"/>
+      <!-- Camera Icon -->
+      <rect x="45" y="50" width="30" height="25" rx="4" fill="#0B1F3A"/>
+      <polygon points="75,55 90,47 90,78 75,70" fill="#0B1F3A"/>
+      <circle cx="60" cy="62" r="6" fill="#38BDF8"/>
+      <text x="125" y="52" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="bold" fill="#F8FAFC">Live Dual Dashcams</text>
+      <text x="125" y="82" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94A3B8">Interior cabin and road monitoring with centralized live security feed.</text>
+    </g>
+
+    <!-- Feature 3: Certified First Aid & Emergency Kits -->
+    <g transform="translate(80, 320)">
+      <rect width="520" height="130" rx="18" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+      <circle cx="65" cy="65" r="36" fill="#10B981"/>
+      <!-- Medical Cross -->
+      <rect x="57" y="47" width="16" height="36" rx="3" fill="#0B1F3A"/>
+      <rect x="47" y="57" width="36" height="16" rx="3" fill="#0B1F3A"/>
+      <text x="125" y="52" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="bold" fill="#F8FAFC">Medical Kit & Certified Staff</text>
+      <text x="125" y="82" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94A3B8">Full pediatric first-aid kit and fire extinguishers in every van.</text>
+    </g>
+  </g>
+
+  <!-- Left Accent Pill & Floating Highlights -->
+  <g transform="translate(180, 160)">
+    <rect width="200" height="40" rx="20" fill="url(#yellowPill)"/>
+    <text x="100" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#0B1F3A" text-anchor="middle">FLEET EXCELLENCE</text>
+  </g>
+</svg>

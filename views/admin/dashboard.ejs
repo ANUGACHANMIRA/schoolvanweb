@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Top Navbar -->
+  <header class="admin-navbar">
+    <div class="container admin-nav-inner">
+      <div style="display:flex; align-items:center; gap:1.25rem;">
+        <a href="/admin" class="brand-logo">
+          <img src="/images/logo.png" alt="සමස්ත ලංකා පාසල් ළමුන් ප්‍රවාහන සංගමය" style="height:42px; width:auto; object-fit:contain;">
+          <div class="brand-text">
+            <span class="brand-title" style="color:#ffffff; font-size:1.05rem; letter-spacing:normal; line-height:1.2;">සමස්ත ලංකා</span>
+            <span class="brand-subtitle" style="color:var(--primary-yellow); font-size:0.7rem; letter-spacing:normal; text-transform:none;">පාසල් ළමුන් ප්‍රවාහන සංගමය</span>
+          </div>
+        </a>
+        <span style="font-size:0.8rem; background:rgba(255,194,14,0.2); color:var(--primary-yellow); padding:3px 8px; border-radius:4px; font-weight:700;">
+          ADMIN CONTROL CENTER
+        </span>
+      </div>
+
+      <nav class="admin-nav-links">
+        <a href="/admin" class="admin-nav-link <%= activeTab === 'slides' ? 'active' : '' %>">
+          Slideshow Manager
+        </a>
+        <a href="/admin/messages" class="admin-nav-link <%= activeTab === 'messages' ? 'active' : '' %>">
+          Messages (<%= stats.unreadMessages %>)
+        </a>
+        <a href="/admin/news" class="admin-nav-link <%= activeTab === 'news' ? 'active' : '' %>">
+          News Posts (<%= stats.totalNews %>)
+        </a>
+        <a href="/" target="_blank" class="admin-nav-link" title="Open live public website in new tab">
+          Live Website &UpperRightArrow;
+        </a>
+        <a href="/admin/logout" class="btn btn-sm btn-danger" style="margin-left:0.5rem;">
+          Log Out
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Admin Container -->
+  <main class="container admin-container">
+
+    <!-- Flash message banners -->
+    <% if (typeof successMsg !== 'undefined' && successMsg) { %>
+      <div class="alert alert-success">
+        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        <span><%= successMsg %></span>
+      </div>
+    <% } %>
+    <% if (typeof errorMsg !== 'undefined' && errorMsg) { %>
+      <div class="alert alert-danger">
+        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <span><%= errorMsg %></span>
+      </div>
+    <% } %>
+
+    <!-- Header & Statistics Bar -->
+    <div class="admin-header-bar">
+      <div>
+        <h1 class="admin-title">
+          <% if (activeTab === 'slides') { %>
+            Homepage Hero Slideshow Manager
+          <% } else if (activeTab === 'messages') { %>
+            Contact Inquiries &amp; Messages
+          <% } else { %>
+            News &amp; Route Bulletins
+          <% } %>
+        </h1>
+        <p style="color:var(--slate-500); font-size:0.95rem;">
+          <% if (activeTab === 'slides') { %>
+            Upload hero images, customize individual slide durations, reorder display sequence, and toggle visibility.
+          <% } else if (activeTab === 'messages') { %>
+            Review recent parent inquiries submitted via the website contact form.
+          <% } else { %>
+            Publish and manage news articles and announcements shown on the public site.
+          <% } %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg style="width:26px;height:26px;fill:currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        </div>
+        <div>
+          <div class="stat-val"><%= stats.totalSlides %></div>
+          <div class="stat-name">Total Slides</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#ECFDF5; color:#059669;">
+          <svg style="width:26px;height:26px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <div>
+          <div class="stat-val"><%= stats.activeSlides %></div>
+          <div class="stat-name">Active on Home</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#EFF6FF; color:#2563EB;">
+          <svg style="width:26px;height:26px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div>
+          <div class="stat-val"><%= stats.totalMessages %></div>
+          <div class="stat-name">Inquiries (<%= stats.unreadMessages %> unread)</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#FFFBEB; color:#D97706;">
+          <svg style="width:26px;height:26px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <div>
+          <div class="stat-val"><%= stats.totalNews %></div>
+          <div class="stat-name">News Articles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         TAB 1: SLIDESHOW MANAGER (MAIN FEATURE)
+         ====================================================================== -->
+    <% if (activeTab === 'slides') { %>
+
+      <!-- SECTION: ADD / UPLOAD NEW SLIDES -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">
+            <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Add New Hero Slide(s)
+          </h2>
+          <span style="font-size:0.82rem; color:var(--slate-500);">Supported: JPG, PNG, WebP (Max 5MB per file)</span>
+        </div>
+
+        <div class="admin-card-body">
+          <form action="/admin/slides/upload" method="POST" enctype="multipart/form-data" id="uploadSlideForm">
+            <!-- Dropzone Area -->
+            <div class="upload-dropzone" id="uploadDropzone">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <h3 style="font-size:1.15rem; font-weight:700; color:var(--primary-navy); margin-bottom:0.25rem;">
+                Click to browse or drag &amp; drop slide image here
+              </h3>
+              <p style="font-size:0.88rem; color:var(--slate-500);">
+                High resolution landscape images (e.g. 1920 &times; 800) recommended.
+              </p>
+              <input type="file" id="slideImageInput" name="slideImages" accept="image/jpeg,image/png,image/webp" multiple style="display:none;" required>
+            </div>
+
+            <!-- Instant image previews -->
+            <div id="uploadPreviewContainer" class="upload-preview-container"></div>
+
+            <div style="display:grid; grid-template-columns: 1fr 2fr 1.2fr; gap:1.25rem; align-items:end; margin-top:1rem;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label for="duration_seconds" class="form-label">
+                  Display Time (Seconds) *
+                </label>
+                <input type="number" id="duration_seconds" name="duration_seconds" class="form-control" value="5" min="1" max="60" required>
+                <small style="color:var(--slate-500); font-size:0.75rem;">Allowed: 1 to 60 seconds</small>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label for="title" class="form-label">
+                  Slide Title / Headline (Optional)
+                </label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="e.g. Door-to-Door Reliable Transport">
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary" style="width:100%; height:46px;">
+                  <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Upload &amp; Save Slide
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:1rem; margin-bottom:0;">
+              <label for="caption" class="form-label">Slide Subtitle / Caption (Optional)</label>
+              <input type="text" id="caption" name="caption" class="form-control" placeholder="e.g. Certified drivers, 3-point seatbelts, and live GPS tracking for every student.">
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- SECTION: CURRENT SLIDESHOW GRID -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">
+            <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+            Current Slides (<%= slides.length %>)
+          </h2>
+          <span style="font-size:0.85rem; color:var(--slate-500);">
+            Changes to duration and order take effect immediately on next homepage load
+          </span>
+        </div>
+
+        <div class="admin-card-body">
+          <% if (slides && slides.length > 0) { %>
+            <div class="slides-admin-grid" id="slidesContainer">
+              <% slides.forEach((slide, idx) => { %>
+                <div class="slide-admin-card <%= slide.is_active ? '' : 'inactive' %>" id="slide-card-<%= slide.id %>">
+                  <!-- Thumbnail preview -->
+                  <div class="slide-admin-thumb-wrapper">
+                    <img src="<%= slide.image_path %>" alt="<%= slide.title || 'Slide thumbnail' %>" class="slide-admin-thumb" loading="lazy">
+                    <span class="slide-order-badge">#<%= idx + 1 %></span>
+                    <span class="slide-status-badge <%= slide.is_active ? 'badge-active' : 'badge-inactive' %>">
+                      <%= slide.is_active ? 'Active' : 'Hidden' %>
+                    </span>
+                  </div>
+
+                  <!-- Details & Duration -->
+                  <div class="slide-admin-content">
+                    <div>
+                      <h4 style="font-size:1rem; font-weight:800; color:var(--primary-navy); margin-bottom:0.25rem;">
+                        <%= slide.title || 'Untitled Slide' %>
+                      </h4>
+                      <p style="font-size:0.82rem; color:var(--slate-600); line-height:1.4;">
+                        <%= slide.caption || 'No caption entered' %>
+                      </p>
+                    </div>
+
+                    <!-- Duration Input -->
+                    <div class="slide-duration-row">
+                      <span style="font-size:0.85rem; font-weight:700; color:var(--slate-700);">
+                        Display Time:
+                      </span>
+                      <div class="duration-input-wrapper">
+                        <input type="number" 
+                               class="duration-input slide-duration-input" 
+                               data-id="<%= slide.id %>" 
+                               value="<%= slide.duration_seconds || 5 %>" 
+                               min="1" 
+                               max="60" 
+                               title="Display duration in seconds (1 - 60)">
+                        <span style="font-size:0.82rem; font-weight:700; color:var(--slate-500);">sec</span>
+                      </div>
+                    </div>
+
+                    <!-- Actions Bar -->
+                    <div class="slide-admin-actions">
+                      <!-- Reorder buttons -->
+                      <div class="reorder-btns">
+                        <button type="button" 
+                                class="reorder-btn" 
+                                data-id="<%= slide.id %>" 
+                                data-direction="up" 
+                                title="Move Earlier" 
+                                <%= idx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : '' %>>
+                          &uarr;
+                        </button>
+                        <button type="button" 
+                                class="reorder-btn" 
+                                data-id="<%= slide.id %>" 
+                                data-direction="down" 
+                                title="Move Later" 
+                                <%= idx === slides.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : '' %>>
+                          &darr;
+                        </button>
+                      </div>
+
+                      <div style="display:flex; gap:0.5rem;">
+                        <!-- Active / Inactive Toggle -->
+                        <button type="button" 
+                                class="btn btn-sm toggle-active-btn <%= slide.is_active ? 'btn-outline-navy' : 'btn-success' %>" 
+                                data-id="<%= slide.id %>" 
+                                title="Toggle visibility without deleting">
+                          <%= slide.is_active ? 'Hide' : 'Show' %>
+                        </button>
+
+                        <!-- Delete Button with confirmation -->
+                        <button type="button" 
+                                class="btn btn-sm btn-danger delete-slide-btn" 
+                                data-id="<%= slide.id %>" 
+                                title="Delete this slide">
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          <% } else { %>
+            <div style="text-align:center; padding:3rem; background:var(--slate-50); border-radius:var(--radius-md);">
+              <h3 style="color:var(--primary-navy); margin-bottom:0.5rem;">No Slides Found</h3>
+              <p style="color:var(--slate-500); margin-bottom:1.5rem;">
+                The homepage currently displays the default placeholder graphic. Upload an image above to activate the slideshow.
+              </p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+    <!-- ======================================================================
+         TAB 2: MESSAGES & CONTACT FORM SUBMISSIONS
+         ====================================================================== -->
+    <% } else if (activeTab === 'messages') { %>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">
+            <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Parent Contact Submissions (<%= messages.length %>)
+          </h2>
+        </div>
+
+        <div class="admin-card-body" style="padding:0;">
+          <% if (messages && messages.length > 0) { %>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date &amp; Time</th>
+                    <th>Parent Name</th>
+                    <th>Contact Info</th>
+                    <th>Inquiry Details</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% messages.forEach(msg => { %>
+                    <tr style="<%= msg.is_read ? '' : 'background-color:#F0FDF4;' %>">
+                      <td style="white-space:nowrap; font-size:0.85rem; color:var(--slate-500);">
+                        <%= msg.created_at %>
+                        <% if (!msg.is_read) { %>
+                          <span style="display:block; color:#059669; font-weight:800; font-size:0.75rem;">NEW</span>
+                        <% } %>
+                      </td>
+                      <td>
+                        <strong><%= msg.name %></strong>
+                      </td>
+                      <td>
+                        <div><a href="tel:<%= msg.phone %>" style="color:var(--primary-navy); font-weight:600;"><%= msg.phone || 'N/A' %></a></div>
+                        <div><a href="mailto:<%= msg.email %>" style="color:var(--slate-500); font-size:0.85rem;"><%= msg.email %></a></div>
+                      </td>
+                      <td style="max-width:350px;">
+                        <p style="margin:0; line-height:1.5;"><%= msg.message %></p>
+                      </td>
+                      <td>
+                        <form action="/admin/messages/<%= msg.id %>/delete" method="POST" onsubmit="return confirm('Delete this inquiry?');">
+                          <button type="submit" class="btn btn-sm btn-danger" style="padding:0.25rem 0.6rem; font-size:0.8rem;">
+                            Delete
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          <% } else { %>
+            <div style="text-align:center; padding:3rem; color:var(--slate-500);">
+              No messages have been submitted yet.
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+    <!-- ======================================================================
+         TAB 3: NEWS POSTS MANAGER
+         ====================================================================== -->
+    <% } else if (activeTab === 'news') { %>
+
+      <!-- Add News Form -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">
+            <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Publish New Announcement / News Post
+          </h2>
+        </div>
+        <div class="admin-card-body">
+          <form action="/admin/news/create" method="POST">
+            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.25rem;">
+              <div class="form-group">
+                <label for="news_title" class="form-label">Article Title *</label>
+                <input type="text" id="news_title" name="title" class="form-control" placeholder="e.g. New Van Fleet Inspection Complete" required>
+              </div>
+              <div class="form-group">
+                <label for="news_date" class="form-label">Display Date *</label>
+                <input type="text" id="news_date" name="date" class="form-control" value="<%= new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="news_summary" class="form-label">Short Summary (Shown on homepage card) *</label>
+              <input type="text" id="news_summary" name="summary" class="form-control" placeholder="One or two sentences highlighting the update..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="news_content" class="form-label">Full Article Content *</label>
+              <textarea id="news_content" name="content" class="form-control" rows="4" placeholder="Detailed announcement text..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Publish News Post
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Current News List -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">
+            Current News Articles (<%= news.length %>)
+          </h2>
+        </div>
+        <div class="admin-card-body" style="padding:0;">
+          <% if (news && news.length > 0) { %>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Title &amp; Summary</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% news.forEach(item => { %>
+                    <tr>
+                      <td style="white-space:nowrap; font-size:0.85rem; color:var(--slate-500); font-weight:700;">
+                        <%= item.date %>
+                      </td>
+                      <td>
+                        <strong style="color:var(--primary-navy); font-size:1rem;"><%= item.title %></strong>
+                        <p style="margin:0.25rem 0 0 0; color:var(--slate-600); font-size:0.88rem;"><%= item.summary %></p>
+                      </td>
+                      <td>
+                        <form action="/admin/news/<%= item.id %>/delete" method="POST" onsubmit="return confirm('Delete this article?');">
+                          <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          <% } else { %>
+            <div style="text-align:center; padding:3rem; color:var(--slate-500);">
+              No news articles published yet.
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+    <% } %>
+
+  </main>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

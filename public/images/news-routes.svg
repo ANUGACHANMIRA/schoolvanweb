@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="n3g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#n3g)"/>
+  <!-- Map Route graphic -->
+  <path d="M 100,380 C 250,380 200,200 400,200 C 600,200 550,100 700,100" stroke="#FFC20E" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <circle cx="100" cy="380" r="24" fill="#38BDF8"/>
+  <circle cx="400" cy="200" r="24" fill="#FFC20E"/>
+  <circle cx="700" cy="100" r="28" fill="#10B981"/>
+  <rect x="40" y="420" width="240" height="40" rx="8" fill="#38BDF8"/>
+  <text x="160" y="446" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0B1F3A" text-anchor="middle">NEW DISTRICT ROUTES</text>
+</svg>
